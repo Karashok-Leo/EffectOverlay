@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "effect-overlay",
+	"version": "${version}",
+	"name": "Effect Overlay",
+	"description": "Effect Overlay",
+	"authors": [
+		"Karashok Leo"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "LGPLv2.1",
+	"icon": "assets/effect-overlay/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"karashokleo.effect_overlay.EffectOverlay"
+		]
+	},
+	"mixins": [
+		"effect-overlay.mixins.json"
+	],
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_1309": ["karashokleo/effect_overlay/api/SyncEffectsProvider"]
+		}
+	},
+	"accessWidener" : "effect-overlay.accesswidener",
+	"depends": {
+		"java": ">=17",
+		"minecraft": "~1.20.1",
+		"fabricloader": "*",
+		"fabric-api": "*"
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "effect-overlay-test",
+	"version": "${version}",
+	"name": "Effect Overlay Test",
+	"description": "Effect Overlay Test",
+	"authors": [
+		"Karashok Leo"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "LGPLv2.1",
+	"icon": "assets/effect-overlay/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"TestMod"
+		]
+	},
+	"depends": {
+		"java": ">=17",
+		"minecraft": "~1.20.1",
+		"fabricloader": "*",
+		"fabric-api": "*"
+	}
+}
