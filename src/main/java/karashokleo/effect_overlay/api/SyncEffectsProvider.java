@@ -15,11 +15,17 @@ public interface SyncEffectsProvider
         for (String entry : string.split(";"))
         {
             String[] pair = entry.split(",");
-            if (pair.length != 2) continue;
+            if (pair.length != 2)
+            {
+                continue;
+            }
             int rawId = Integer.parseInt(pair[0]);
             int amplifier = Integer.parseInt(pair[1]);
             StatusEffect effect = StatusEffect.byRawId(rawId);
-            if (effect == null) continue;
+            if (effect == null)
+            {
+                continue;
+            }
             map.put(effect, amplifier);
         }
         return map;
@@ -29,13 +35,20 @@ public interface SyncEffectsProvider
     {
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<StatusEffect, StatusEffectInstance> entry : map.entrySet())
+        {
             if (entry.getKey() instanceof SyncEffect)
+            {
                 builder.append(StatusEffect.getRawId(entry.getKey()))
-                        .append(',')
-                        .append(entry.getValue().getAmplifier())
-                        .append(';');
+                    .append(',')
+                    .append(entry.getValue().getAmplifier())
+                    .append(';');
+            }
+        }
         return builder.toString();
     }
 
-    Map<StatusEffect, Integer> getSyncEffects();
+    default Map<StatusEffect, Integer> getSyncEffects()
+    {
+        return Map.of();
+    }
 }
