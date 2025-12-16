@@ -1,11 +1,15 @@
 package karashokleo.effect_overlay.impl;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import karashokleo.effect_overlay.api.*;
+import karashokleo.effect_overlay.api.ClientRenderEffect;
+import karashokleo.effect_overlay.api.EffectRenderer;
+import karashokleo.effect_overlay.api.FirstPlayerRenderEffect;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
@@ -24,9 +28,15 @@ public class ClientEffectRenderEvents
     {
         AbstractClientPlayerEntity player = client.player;
         if (player != null)
+        {
             for (Map.Entry<StatusEffect, StatusEffectInstance> entry : player.getActiveStatusEffects().entrySet())
+            {
                 if (entry.getKey() instanceof FirstPlayerRenderEffect effect)
+                {
                     effect.onClientWorldRender(player, entry.getValue());
+                }
+            }
+        }
     }
 
     @Deprecated
@@ -42,7 +52,9 @@ public class ClientEffectRenderEvents
         MatrixStack stack = context.matrixStack();
         stack.push();
         for (EffectRenderer icon : RENDERERS)
+        {
             icon.render(stack, buffers, context.tickDelta(), camera, renderer.entityRenderDispatcher);
+        }
         buffers.draw();
         stack.pop();
 
@@ -53,20 +65,33 @@ public class ClientEffectRenderEvents
 
     public static void onLivingRenderEvents(LivingEntity entity, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider)
     {
-        if (entity.getCommandTags().contains("ClientOnly")) return;
+        if (entity.getCommandTags().contains("ClientOnly"))
+        {
+            return;
+        }
         Map<StatusEffect, Integer> syncEffects = entity.getSyncEffects();
-        if (syncEffects.isEmpty()) return;
+        if (syncEffects.isEmpty())
+        {
+            return;
+        }
         ArrayList<EffectRenderer> renderers = new ArrayList<>();
         for (Map.Entry<StatusEffect, Integer> entry : syncEffects.entrySet())
+        {
             if (entry.getKey() instanceof ClientRenderEffect effect)
             {
                 EffectRenderer renderer = effect.getRenderer(entity, entry.getValue());
-                if (renderer == null) continue;
+                if (renderer == null)
+                {
+                    continue;
+                }
                 renderers.add(renderer);
             }
+        }
 
         if (!EffectRenderer.BEFORE_RENDER.invoker().beforeRender(entity, renderers))
+        {
             return;
+        }
 
         MinecraftClient client = MinecraftClient.getInstance();
         Camera camera = client.gameRenderer.getCamera();

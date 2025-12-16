@@ -42,8 +42,8 @@ public abstract class LivingEntityMixin extends Entity implements SyncEffectsPro
     }
 
     @Inject(
-            method = "initDataTracker",
-            at = @At("TAIL")
+        method = "initDataTracker",
+        at = @At("TAIL")
     )
     private void inject_initDataTracker(CallbackInfo info)
     {
@@ -51,20 +51,23 @@ public abstract class LivingEntityMixin extends Entity implements SyncEffectsPro
     }
 
     @Inject(
-            method = "updatePotionVisibility",
-            at = @At("HEAD")
+        method = "updatePotionVisibility",
+        at = @At("HEAD")
     )
     private void inject_updatePotionVisibility(CallbackInfo ci)
     {
         if (activeStatusEffects.isEmpty())
+        {
             this.dataTracker.set(SYNC_EFFECTS, "");
-        else
+        } else
+        {
             this.dataTracker.set(SYNC_EFFECTS, activeStatusEffects.isEmpty() ? "" : SyncEffectsProvider.writeToString(activeStatusEffects));
+        }
     }
 
     @Inject(
-            method = "tickStatusEffects",
-            at = @At("TAIL")
+        method = "tickStatusEffects",
+        at = @At("TAIL")
     )
     private void inject_tickStatusEffects(CallbackInfo info)
     {

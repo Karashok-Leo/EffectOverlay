@@ -51,12 +51,12 @@ public class IconEffectRenderer implements EffectRenderer
     public void render(MatrixStack pose, VertexConsumerProvider buffer, float tickDelta, Camera camera, EntityRenderDispatcher dispatcher)
     {
         Vec3d d = dispatcher.getRenderer(entity).getPositionOffset(entity, tickDelta)
-                .subtract(camera.getPos())
-                .add(
-                        MathHelper.lerp(tickDelta, entity.lastRenderX, entity.getX()),
-                        MathHelper.lerp(tickDelta, entity.lastRenderY, entity.getY()),
-                        MathHelper.lerp(tickDelta, entity.lastRenderZ, entity.getZ())
-                );
+            .subtract(camera.getPos())
+            .add(
+                MathHelper.lerp(tickDelta, entity.lastRenderX, entity.getX()),
+                MathHelper.lerp(tickDelta, entity.lastRenderY, entity.getY()),
+                MathHelper.lerp(tickDelta, entity.lastRenderZ, entity.getZ())
+            );
 
         pose.push();
 
@@ -82,23 +82,23 @@ public class IconEffectRenderer implements EffectRenderer
     public RenderLayer get2DIcon()
     {
         return RenderLayer.of(
-                "entity_body_icon",
-                VertexFormats.POSITION_TEXTURE,
-                VertexFormat.DrawMode.QUADS, 256, false, true,
-                RenderLayer.MultiPhaseParameters.builder()
-                        .program(RenderPhase.ENTITY_GLINT_PROGRAM)
-                        .texture(new RenderPhase.Texture(id, false, false))
-                        .transparency(RenderPhase.ADDITIVE_TRANSPARENCY)
-                        .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
-                        .build(false)
+            "entity_body_icon",
+            VertexFormats.POSITION_TEXTURE,
+            VertexFormat.DrawMode.QUADS, 256, false, true,
+            RenderLayer.MultiPhaseParameters.builder()
+                .program(RenderPhase.ENTITY_GLINT_PROGRAM)
+                .texture(new RenderPhase.Texture(id, false, false))
+                .transparency(RenderPhase.ADDITIVE_TRANSPARENCY)
+                .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
+                .build(false)
         );
     }
 
     private static void iconVertex(MatrixStack.Entry entry, VertexConsumer builder, float x, float y, float u, float v)
     {
         builder.vertex(entry.getPositionMatrix(), x, y, 0)
-                .texture(u, v)
-                .normal(entry.getNormalMatrix(), 0.0F, 1.0F, 0.0F)
-                .next();
+            .texture(u, v)
+            .normal(entry.getNormalMatrix(), 0.0F, 1.0F, 0.0F)
+            .next();
     }
 }

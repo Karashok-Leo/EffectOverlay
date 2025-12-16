@@ -16,8 +16,12 @@ public interface EffectRenderer
     {
         boolean shouldRender = true;
         for (BeforeRender beforeRender : beforeRenders)
+        {
             if (!beforeRender.beforeRender(entity, renderers))
+            {
                 shouldRender = false;
+            }
+        }
         return shouldRender;
     });
 
