@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.14-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -11,7 +11,7 @@ base {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/effect-overlay.accesswidener")
+    accessWidenerPath = file("src/main/resources/effect-overlay.classtweaker")
     runs {
         testClient{
             client()

@@ -22,12 +22,7 @@
 	"mixins": [
 		"effect-overlay.mixins.json"
 	],
-	"custom": {
-		"loom:injected_interfaces": {
-			"net/minecraft/class_1309": ["karashokleo/effect_overlay/api/SyncEffectsProvider"]
-		}
-	},
-	"accessWidener" : "effect-overlay.accesswidener",
+	"accessWidener" : "effect-overlay.classtweaker",
 	"depends": {
 		"java": ">=17",
 		"minecraft": "~1.20.1",

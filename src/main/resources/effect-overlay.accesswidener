@@ -1,4 +1,0 @@
-accessWidener   v1  named
-accessible class net/minecraft/client/render/RenderLayer$MultiPhaseParameters
-accessible class net/minecraft/client/render/RenderPhase$Texture
-accessible field net/minecraft/client/render/WorldRenderer entityRenderDispatcher Lnet/minecraft/client/render/entity/EntityRenderDispatcher;
